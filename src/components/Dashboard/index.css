@@ -1,0 +1,117 @@
+.dashboard__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dashboard__container {
+  display: flex;
+  margin: 50px 0;
+  flex-direction: column;
+  width: 50%;
+}
+.dashboard__selection {
+  width: 100%;
+  background-color: #f2f2f2;
+  padding: 20px 40px;
+}
+.dashboard__selection select {
+  color: #333;
+  font-size: 20px;
+  background: none;
+  border: none;
+  outline: none;
+  width: 30%;
+}
+.dashboard__prev {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 50px;
+  margin: 40px 0;
+  box-shadow: 0 0 39px rgba(0, 0, 0, 0.1);
+}
+.dashboardprev__left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dashboardprev__left h2 {
+  font-weight: 600;
+  font-size: 24px;
+  color: #333;
+}
+.dashboardprev__left p {
+  font-size: 96px;
+  color: #4776e6;
+  font-weight: 900;
+}
+.dashboardprev__right {
+  font-size: 18px;
+  font-weight: 500;
+}
+.dashboard__history {
+  width: 100%;
+}
+.dashboard__history table {
+  width: 100%;
+}
+.dashboard__history table tr {
+  display: flex;
+  width: 100%;
+}
+.dashboard__history table tr th,
+.dashboard__history table tr td {
+  width: 25%;
+  display: flex;
+}
+.dashboard__history table tr th:first-child,
+.dashboard__history table tr td:first-child {
+  flex: 50%;
+  justify-content: flex-start;
+}
+.dashboard__history table tr th {
+  background-color: #f2f2f2;
+  padding: 20px 40px;
+}
+.dashboard__history table tr td {
+  padding: 20px 40px;
+  border-bottom: 1px solid #d4d4d4;
+}
+.dashboard__getinsight {
+  width: 50%;
+}
+.dashboard__getinsight form {
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  background-color: #0d8bfc;
+  padding: 3px;
+}
+.dashboard__getinsight form input {
+  padding: 15px 30px;
+  flex: 5;
+  border: none;
+  outline: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+}
+.dashboard__getinsight form input[type="submit"] {
+  flex: 1;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 20px;
+  background: none;
+  background-color: #0d8bfc;
+  color: white;
+}
+.dashboard__history table tr td {
+  display: flex;
+  align-items: center;
+}
+.dashboard__history table tr td i {
+  color: #828282;
+  padding: 10px;
+}
+.golden {
+  color: yellow !important;
+}

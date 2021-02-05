@@ -1,0 +1,72 @@
+.landing__container {
+  padding: 0 100px;
+  display: flex;
+  flex-direction: column;
+}
+.landing__main {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.landing__leftContainer,
+.landing__rightContainer {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing__leftContainer {
+  flex: 2;
+  flex-direction: column;
+}
+.landing__leftContainer p {
+  width: 100%;
+  color: #333;
+  font-size: 28px;
+  margin: 20px 0;
+}
+.landing__leftContainer p span {
+  color: #0d8bfc;
+  font-weight: 800;
+}
+.landing__leftContainer h1 {
+  font-size: 60px;
+  font-weight: 900;
+  color: #333;
+}
+.landing__secondary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.landing__secondary p {
+  font-size: 20px;
+  color: #4f4f4f;
+}
+.landing__secondary form {
+  width: 50%;
+  margin: 20px 0;
+  display: flex;
+  background-color: #0d8bfc;
+  padding: 3px;
+}
+.landing__secondary form input {
+  padding: 15px 30px;
+  flex: 5;
+  border: none;
+  outline: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+}
+.landing__secondary form input[type="submit"] {
+  flex: 1;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 20px;
+  background: none;
+  background-color: #0d8bfc;
+  color: white;
+}
