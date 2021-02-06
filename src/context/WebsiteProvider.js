@@ -1,7 +1,5 @@
 import { useState, useEffect, createContext, useContext } from "react";
-import firebase from "firebase";
-
-import { firestore } from "../services/firebase";
+import axios from "axios";
 
 import { UserContext } from "./UserProvider";
 
@@ -12,33 +10,39 @@ export default (props) => {
   const [websites, setWebsites] = useState(null);
 
   const updateWebsites = async (url, wordCount) => {
-    const userRef = firestore.collection("users").doc(user.uid);
-    await userRef.update({
-      websites: firebase.firestore.FieldValue.arrayUnion({
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_URL}/addwebsite`,
+      {
         url: url,
         wordCount: wordCount,
-      }),
-    });
-    const snapShot = await userRef.get();
-    if (snapShot.exists) {
-      const data = snapShot.data();
-      setWebsites(data.websites.reverse());
-    }
+      },
+      {
+        headers: {
+          userId: user._id,
+        },
+      }
+    );
+    if (data.error) alert(data.error);
+    if (data.websites) setWebsites(data.websites);
   };
 
   useEffect(() => {
     const fetchData = async () => {
-      const userRef = firestore.collection("users").doc(user.uid);
-      const snapShot = await userRef.get();
-      if (snapShot.exists) {
-        const data = snapShot.data();
-        setWebsites(data.websites.reverse());
-      }
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/getwebsites`,
+        {
+          headers: {
+            userId: user._id,
+          },
+        }
+      );
+      if (data.error) alert(data.error);
+      if (data.websites) setWebsites(data.websites);
     };
     if (user) fetchData();
   }, [user]);
   return (
-    <WebsiteContext.Provider value={{ websites, updateWebsites }}>
+    <WebsiteContext.Provider value={{ websites, setWebsites, updateWebsites }}>
       {props.children}
     </WebsiteContext.Provider>
   );

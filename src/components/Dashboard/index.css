@@ -61,12 +61,14 @@
 }
 .dashboard__history table tr th,
 .dashboard__history table tr td {
-  width: 25%;
+  width: 30%;
   display: flex;
 }
 .dashboard__history table tr th:first-child,
 .dashboard__history table tr td:first-child {
-  flex: 50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 40%;
   justify-content: flex-start;
 }
 .dashboard__history table tr th {
@@ -113,5 +115,58 @@
   padding: 10px;
 }
 .golden {
-  color: yellow !important;
+  color: #0d8bfc !important;
+}
+
+@media screen and (max-width: 1024px) {
+  .dashboard__main {
+    width: 100%;
+  }
+  .dashboard__container {
+    width: 70%;
+  }
+  .dashboard__getinsight {
+    width: 70%;
+  }
+  .dashboard__history table tr th,
+  .dashboard__history table tr td {
+    padding: 10px 20px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .dashboard__main {
+    width: 100%;
+    padding: 0 30px;
+  }
+  .dashboard__container {
+    width: 100%;
+  }
+  .dashboard__getinsight {
+    width: 100%;
+  }
+  .dashboard__getinsight form {
+    width: 100%;
+    flex-direction: column;
+  }
+  .dashboard__prev {
+    flex-direction: column;
+  }
+  .dashboardprev__right {
+    text-align: center;
+  }
+  .dashboard__selection select {
+    width: 100%;
+  }
+  .dashboard__history table tr,
+  .dashboard__history table tr th {
+    font-size: 12px;
+    justify-content: center;
+  }
+  .dashboard__history table tr th,
+  .dashboard__history table tr td {
+    width: 30%;
+    justify-content: center;
+    padding: 10px 5px;
+  }
 }

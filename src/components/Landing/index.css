@@ -47,7 +47,7 @@
   color: #4f4f4f;
 }
 .landing__secondary form {
-  width: 50%;
+  min-width: 50%;
   margin: 20px 0;
   display: flex;
   background-color: #0d8bfc;
@@ -69,4 +69,35 @@
   background: none;
   background-color: #0d8bfc;
   color: white;
+}
+
+@media screen and (max-width: 1024px) {
+  .landing__main {
+    flex-direction: column;
+    align-items: center;
+    padding: 100px 0;
+  }
+  .landing__leftContainer,
+  .landing__rightContainer {
+    flex: 1;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .landing__leftContainer h1 {
+    font-size: 48px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .landing__container {
+    padding: 0 30px;
+  }
+  .landing__rightContainer img {
+    height: 70vw;
+  }
+  .landing__secondary form {
+    width: 100%;
+    flex-direction: column;
+  }
 }

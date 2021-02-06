@@ -20,30 +20,11 @@ export const signInWithGoogle = () => {
   auth
     .signInWithPopup(googleProvider)
     .then((res) => {
-      createUserDocument(res.user).then((res) => console.log(res));
+      console.log(res);
     })
     .catch((err) => {
       console.log(err.message);
     });
-};
-
-export const createUserDocument = async (user) => {
-  if (!user) return;
-  const userRef = firestore.doc(`users/${user.uid}`);
-  const snapShot = await userRef.get();
-  if (!snapShot.exists) {
-    const { displayName, email } = user;
-    try {
-      userRef.set({
-        displayName,
-        email,
-        websites: [],
-        createdAt: new Date(),
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }
 };
 
 export const logout = () => {

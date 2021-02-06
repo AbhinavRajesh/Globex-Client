@@ -36,3 +36,12 @@
   color: white;
   background-color: #0c7bde;
 }
+
+@media screen and (max-width: 500px) {
+  .navbar__container {
+    padding: 10px 30px;
+  }
+  .navbar__links ul a {
+    margin: 0;
+  }
+}

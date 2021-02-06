@@ -20,9 +20,11 @@ const Navbar = () => {
             <Link onClick={logout}>Logout</Link>
           ) : (
             <>
-              <Link onClick={signInWithGoogle}>
-                <li>Login</li>
-              </Link>
+              {window.innerWidth > 500 && (
+                <Link onClick={signInWithGoogle}>
+                  <li>Login</li>
+                </Link>
+              )}
               <Link onClick={signInWithGoogle}>
                 <li>Sign up</li>
               </Link>

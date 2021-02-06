@@ -8,13 +8,12 @@ import { WebsiteContext } from "../../context/WebsiteProvider";
 import "./index.css";
 
 const Dashboard = () => {
-  let selectedRef = useRef();
   const [redirect, setRedirect] = useState(null);
   const [selected, setSelected] = useState(0);
   const [website, setWebsite] = useState("");
 
   const user = useContext(UserContext);
-  const { websites, updateWebsites } = useContext(WebsiteContext);
+  const { websites, setWebsites, updateWebsites } = useContext(WebsiteContext);
 
   const handleSubmit = async (e) => {
     const noscript = (strCode) => {
@@ -30,14 +29,17 @@ const Dashboard = () => {
       `${process.env.REACT_APP_API_URL}/getwordcount`,
       {
         url: website,
+      },
+      {
+        headers: {
+          userId: user._id,
+        },
       }
     );
     if (data.htmlText) {
       const body = stringToHTML(data.htmlText);
-      console.log(body);
       let content = body.textContent;
       content = noscript(content);
-      console.log(content);
       updateWebsites(website, content.match(/\S+/g).length);
       setWebsite("");
     }
@@ -45,11 +47,40 @@ const Dashboard = () => {
   };
   const handleChange = (e) => setWebsite(e.target.value);
 
+  const handleDelete = async (id) => {
+    console.log("HANDLE DELETE");
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API_URL}/deletehistory/${id}`,
+      {
+        headers: {
+          userId: user._id,
+        },
+      }
+    );
+    console.log(data);
+    if (data.error) alert(data.error);
+    if (data.websites) setWebsites(data.websites);
+  };
+  const handleFavourite = async (id) => {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API_URL}/favourite/${id}`,
+      {
+        headers: {
+          userId: user._id,
+        },
+      }
+    );
+    console.log(data.websites);
+    if (data.error) alert(data.error);
+    if (data.websites) setWebsites(data.websites);
+  };
+
   useEffect(() => {
     if (!user) {
       setRedirect("/");
     }
   }, [user]);
+
   if (redirect) {
     <Redirect to={redirect} />;
   }
@@ -62,6 +93,7 @@ const Dashboard = () => {
             type="text"
             placeholder="Put your website URL here. Eg. https://www.growth.cx/"
             value={website}
+            required
             onChange={handleChange}
           />
           <input type="submit" value="Get Insights" />
@@ -89,25 +121,38 @@ const Dashboard = () => {
           </div>
           <div className="dashboard__history">
             <table>
-              <tr>
-                <th>URL</th>
-                <th>Word Count</th>
-                <th>Actions</th>
-              </tr>
-              {websites.map((website, key) => (
-                <tr key={key}>
-                  <td>{website.url}</td>
-                  <td>{website.wordCount}</td>
-                  <td>
-                    <i className="fas fa-trash-alt"></i>
-                    {website.favourite ? (
-                      <i className="fas fa-star golden"></i>
-                    ) : (
-                      <i className="far fa-star"></i>
-                    )}
-                  </td>
+              <thead>
+                <tr>
+                  <th>URL</th>
+                  <th>Word Count</th>
+                  <th>Actions</th>
                 </tr>
-              ))}
+              </thead>
+              <tbody>
+                {websites.map((website) => (
+                  <tr key={website._id}>
+                    <td>{website.url}</td>
+                    <td>{website.wordCount}</td>
+                    <td>
+                      <i
+                        className="fas fa-trash-alt"
+                        onClick={() => handleDelete(website._id)}
+                      ></i>
+                      {website.favourite ? (
+                        <i
+                          className="fas fa-star golden"
+                          onClick={() => handleFavourite(website._id)}
+                        ></i>
+                      ) : (
+                        <i
+                          className="far fa-star"
+                          onClick={() => handleFavourite(website._id)}
+                        ></i>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
         </div>
